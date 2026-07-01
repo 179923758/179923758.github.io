@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>飞书表格数据演示</title>
+</head>
+<body>
+    <h3>飞书表格数据</h3>
+    <div id="result"></div>
+
+    <script>
+        // ========== 修改这里 ==========
+        const WORKER_URL = "https://zxk.179923758.workers.dev/feishu";
+        const APP_TOKEN = "OK3EbLytjac4DdsEc8ucrHysnqt";
+        const TABLE_ID = "tblfaDqF0sGncp89";
+        // ==============================
+
+        // 请求Worker代理，间接获取飞书数据
+        async function getFeishuData() {
+            try {
+                const res = await fetch(`${WORKER_URL}?app_token=${APP_TOKEN}&table_id=${TABLE_ID}`);
+                const data = await res.json();
+                console.log("飞书原始数据", data);
+                document.getElementById("result").innerText = JSON.stringify(data, null, 2);
+            } catch (e) {
+                document.getElementById("result").innerText = "请求失败：" + e.message;
+            }
+        }
+
+        // 页面加载自动执行
+        getFeishuData();
+    </script>
+</body>
+</html>
