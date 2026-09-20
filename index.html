@@ -2,231 +2,291 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
+<!-- viewport-fit=cover 适配 iPhone 刘海屏；maximum-scale=1 防止双击缩放 -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>We are married｜周晓柯&付嘉欣的婚礼邀请函</title>
 <style>
-  :root{
-    --ink:#222; --gray:#8a8a8a; --light-gray:#b5ae9f;
-    --orange:#e87a33; --brown:#9c6b2f; --cal-num:#5f5548;
-    --red:#e64340; --black:#141414; --paper:#fff;
-    --kai:'Kaiti SC','STKaiti','KaiTi','BiauKai','DFKai-SB',cursive;
-    --serif:Georgia,'Times New Roman',serif;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  html{-webkit-text-size-adjust:100%;}
-  body{
-    font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue','Microsoft YaHei',sans-serif;
-    background:#eaeaea;color:var(--ink);
-  }
-  .page{max-width:480px;margin:0 auto;background:var(--paper);min-height:100vh;overflow-x:hidden;}
+/* ============================================================
+   设计变量（CSS自定义属性）
+   - 统一管理主色、辅助色、字体，方便后续换主题
+   ============================================================ */
+:root{
+  --ink:#222;            /* 正文主色 */
+  --gray:#8a8a8a;        /* 辅助文字灰 */
+  --light-gray:#b5ae9f;
+  --orange:#e87a33;      /* 日历高亮橙 */
+  --brown:#9c6b2f;      /* 日历标题棕 */
+  --cal-num:#5f5548;    /* 日历数字色 */
+  --red:#e64340;        /* 必填星号红 */
+  --black:#141414;      /* 提交按钮黑 */
+  --paper:#fff;         /* 页面纸张底色 */
+  /* 手写楷体字体栈：macOS → Windows → 其他 */
+  --kai:'Kaiti SC','STKaiti','KaiTi','BiauKai','DFKai-SB',cursive;
+  /* 英文衬线体 */
+  --serif:Georgia,'Times New Roman',serif;
+}
 
-  /* ---------- 悬浮音乐按钮（录屏中右上角固定圆形半透明按钮） ---------- */
-  .fab-music{
-    position:fixed;top:18px;right:14px;z-index:99;
-    width:42px;height:42px;border-radius:50%;
-    background:rgba(255,255,255,.82);box-shadow:0 2px 8px rgba(0,0,0,.12);
-    display:flex;align-items:center;justify-content:center;
-    border:none;cursor:pointer;backdrop-filter:blur(4px);
-  }
-  .fab-music .disc{font-size:21px;color:#4a4a4a;line-height:1;display:inline-block;}
-  .fab-music.playing .disc{animation:spin 6s linear infinite;}
-  @keyframes spin{to{transform:rotate(360deg);}}
+/* ---------- 全局重置 ---------- */
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{-webkit-text-size-adjust:100%;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Helvetica Neue','Microsoft YaHei',sans-serif;
+  background:#eaeaea;color:var(--ink);
+}
+/* 页面容器：居中 375~480px 宽度模拟手机屏幕 */
+.page{max-width:480px;margin:0 auto;background:var(--paper);min-height:100vh;overflow-x:hidden;}
 
-  /* ---------- 文章头部 ---------- */
-  .art-head{padding:26px 16px 6px;}
-  .art-head h1{font-size:21px;font-weight:700;line-height:1.45;color:#111;}
-  .art-head .meta{margin-top:14px;font-size:13px;color:var(--gray);display:flex;gap:26px;}
+/* ============================================================
+   ① 悬浮音乐按钮（录屏右上角固定半透明圆形按钮）
+   - backdrop-filter 毛玻璃效果
+   - .playing 状态下唱片旋转动画
+   ============================================================ */
+.fab-music{
+  position:fixed;top:18px;right:14px;z-index:99;
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,.82);box-shadow:0 2px 8px rgba(0,0,0,.12);
+  display:flex;align-items:center;justify-content:center;
+  border:none;cursor:pointer;backdrop-filter:blur(4px);
+}
+.fab-music .disc{font-size:21px;color:#4a4a4a;line-height:1;display:inline-block;}
+.fab-music.playing .disc{animation:spin 6s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
 
-  /* ---------- 正文通用 ---------- */
-  .pad{padding:0 15px;}
-  .poem{padding:26px 22px;text-align:center;font-size:14px;color:#3d3d3d;
-    line-height:2.35;letter-spacing:1.2px;}
-  .poem .dash{display:block;color:#999;margin:2px 0;}
-  .lead-right{padding:18px 20px 20px;text-align:right;font-size:15px;color:#333;line-height:2;}
+/* ============================================================
+   ② 文章头部（公众号图文样式：大标题 + 元信息行）
+   ============================================================ */
+.art-head{padding:26px 16px 6px;}
+.art-head h1{font-size:21px;font-weight:700;line-height:1.45;color:#111;}
+.art-head .meta{margin-top:14px;font-size:13px;color:var(--gray);display:flex;gap:26px;}
 
-  .sec-title{padding:30px 15px 4px;text-align:center;}
-  .sec-title h2{font-size:17px;font-weight:700;color:#111;letter-spacing:.5px;}
-  .sec-title .en{margin-top:12px;font-family:var(--serif);font-size:13px;color:#555;letter-spacing:2.5px;}
+/* ---------- 正文左右内边距工具类 ---------- */
+.pad{padding:0 15px;}
 
-  /* ---------- 图片占位块 ---------- */
-  .ph{
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
-    background:linear-gradient(135deg,#f3f1ec,#e5e1d7);color:#b0a893;
-    font-size:12px;letter-spacing:1px;width:100%;
-  }
-  .ph b{font-size:13px;font-weight:600;}
-  .ph.red{background:linear-gradient(135deg,#a32222,#701414);color:rgba(255,255,255,.75);}
-  .ph.green{background:linear-gradient(135deg,#7a8b62,#4c5c3c);color:rgba(255,255,255,.8);}
-  .ph.dusk{background:linear-gradient(135deg,#e9b27c,#b06a48 60%,#5f4460);color:rgba(255,255,255,.85);}
-  figure{margin:0;}
-  .img-block{margin:14px 15px;}
-  .img-block .ph{aspect-ratio:var(--ar,34/43);}
-  .caption-overlay{position:relative;}
-  .caption-overlay .hand-note{
-    position:absolute;top:12%;left:10%;font-family:var(--kai);font-size:30px;
-    color:#fff;opacity:.9;transform:rotate(-6deg);line-height:1.6;pointer-events:none;
-  }
+/* ============================================================
+   ③ 通用文案块
+   - .poem 居中诗句（行距宽松、字距适中）
+   - .lead-right 右上角引言（录屏首屏的"我们始终相信"右对齐）
+   - .sec-title 章节大标题 + 英文副标题
+   ============================================================ */
+.lead-right{padding:18px 20px 20px;text-align:right;font-size:15px;color:#333;line-height:2;}
 
-  /* ---------- 双图 / 拼贴 ---------- */
-  .grid2{display:flex;gap:10px;margin:14px 15px;}
-  .grid2 figure{flex:1;}
-  .grid2 .ph{aspect-ratio:var(--ar,4/5);}
-  .grid2.stagger figure:last-child{margin-top:46px;}
-  .collage{position:relative;margin:22px 15px 10px;aspect-ratio:34/38;}
-  .collage figure{position:absolute;}
-  .collage .c-left{left:0;top:0;width:58%;}
-  .collage .c-left .ph{aspect-ratio:10/16;}
-  .collage .c-right{right:0;bottom:0;width:46%;z-index:2;box-shadow:0 4px 14px rgba(0,0,0,.08);}
-  .collage .c-right .ph{aspect-ratio:10/13;}
+.poem{padding:26px 22px;text-align:center;font-size:14px;color:#3d3d3d;
+  line-height:2.35;letter-spacing:1.2px;}
+.poem .dash{display:block;color:#999;margin:2px 0;}
 
-  /* ---------- 音乐卡片 ---------- */
-  .audio-card{
-    margin:20px 15px;background:#f7f7f7;border-radius:8px;
-    display:flex;align-items:center;gap:12px;padding:12px 14px;
-  }
-  .audio-card .cover{width:62px;height:62px;border-radius:6px;flex:none;overflow:hidden;}
-  .audio-card .cover .ph{width:100%;height:100%;font-size:10px;}
-  .audio-card .info{flex:1;min-width:0;}
-  .audio-card .song{font-size:16px;font-weight:600;color:#111;}
-  .audio-card .status{margin-top:6px;font-size:13px;color:#a5a5a5;}
-  .eq{display:flex;align-items:flex-end;gap:3px;height:20px;flex:none;}
-  .eq i{width:3px;background:#333;border-radius:1px;animation:eq 1s ease-in-out infinite;}
-  .eq i:nth-child(1){height:60%;animation-delay:0s;}
-  .eq i:nth-child(2){height:100%;animation-delay:.2s;}
-  .eq i:nth-child(3){height:75%;animation-delay:.4s;}
-  .eq i:nth-child(4){height:90%;animation-delay:.1s;}
-  @keyframes eq{0%,100%{transform:scaleY(.4);}50%{transform:scaleY(1);}}
-  .paused .eq i{animation-play-state:paused;transform:scaleY(.4);}
+.sec-title{padding:30px 15px 4px;text-align:center;}
+.sec-title h2{font-size:17px;font-weight:700;color:#111;letter-spacing:.5px;}
+.sec-title .en{margin-top:12px;font-family:var(--serif);font-size:13px;color:#555;letter-spacing:2.5px;}
 
-  /* ---------- 手写标题 ---------- */
-  .hand-title{text-align:center;font-family:var(--kai);color:#1d1d1d;}
-  .hand-title.invite{font-size:32px;letter-spacing:6px;margin:34px 0 10px;}
-  .hand-title.thanks{font-size:26px;letter-spacing:2px;margin:38px 0 6px;}
-  .hand-title.end{font-size:28px;letter-spacing:2px;margin:44px 0 60px;}
-  .serif-sub{text-align:center;font-family:var(--serif);font-size:15px;color:#333;
-    letter-spacing:3px;margin-bottom:6px;}
+/* ============================================================
+   ④ 图片块
+   - 用 background:url + --ar 变量控制宽高比
+   - .ph 是占位底色（图片加载失败时可见）
+   - red / green / dusk 三种主题底色渐变
+   ============================================================ */
+figure{margin:0;}
+.img-block{margin:14px 15px;}
+.img-block .ph{
+  width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#f3f1ec,#e5e1d7);color:#b0a893;
+  font-size:12px;letter-spacing:1px;aspect-ratio:var(--ar,34/43);
+  background-size:cover;background-position:center;
+}
+.ph.red{background:linear-gradient(135deg,#a32222,#701414);color:rgba(255,255,255,.75);}
+.ph.green{background:linear-gradient(135deg,#7a8b62,#4c5c3c);color:rgba(255,255,255,.8);}
+.ph.dusk{background:linear-gradient(135deg,#e9b27c,#b06a48 60%,#5f4460);color:rgba(255,255,255,.85);}
 
-  /* ---------- 人物（宝宝照） ---------- */
-  .couple-row{display:flex;justify-content:center;gap:52px;margin:30px 0 8px;}
-  .couple-row figure{text-align:center;}
-  .couple-row .avatar{
-    width:118px;height:118px;border-radius:50%;overflow:hidden;margin:0 auto;
-  }
-  .couple-row .avatar .ph{width:100%;height:100%;font-size:11px;}
-  .couple-row .avatar.pink .ph{background:linear-gradient(135deg,#cfa0b4,#8f7fae);}
-  .couple-row .avatar.blue .ph{background:linear-gradient(135deg,#a3a8c9,#7f86ad);}
-  .couple-row .name{margin-top:14px;font-size:15px;font-weight:700;color:#111;letter-spacing:2px;}
-  .couple-row .date{margin-top:4px;font-size:15px;font-weight:700;color:#111;letter-spacing:1px;}
+/* ============================================================
+   ⑤ 双图并排 / 错位拼贴
+   - .grid2 两图等宽并排
+   - .grid2.stagger 右图下移 46px 形成错落感
+   - .collage 绝对定位拼贴（左大图+右小图叠压，带白边阴影）
+   ============================================================ */
+.grid2{display:flex;gap:10px;margin:14px 15px;}
+.grid2 figure{flex:1;}
+.grid2 .ph{aspect-ratio:var(--ar,4/5);}
 
-  /* ---------- 英文衬线右对齐块 ---------- */
-  .en-serif-right{padding:8px 22px 6px;text-align:right;font-family:var(--serif);
-    font-size:14px;color:#3f3f3f;line-height:2.1;letter-spacing:.5px;}
-  .slash-mark{padding:0 22px;font-family:var(--serif);font-style:italic;
-    font-size:13px;color:#9a9a9a;letter-spacing:2px;}
-  .en-serif-center{padding:22px 15px 4px;text-align:center;font-family:var(--serif);
-    font-size:13px;color:#4a4a4a;letter-spacing:2px;}
+.collage{position:relative;margin:22px 15px 10px;height:340px;}
+.collage figure{position:absolute;}
+.collage .c-left{left:0;top:0;width:62%;height:280px;}
+.collage .c-left .ph{width:100%;height:100%;}
+.collage .c-right{right:0;top:50px;width:55%;height:280px;z-index:2;
+  border:6px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.08);}
+.collage .c-right .ph{width:100%;height:100%;}
 
-  /* ---------- 婚礼信息 / 日历 ---------- */
-  .cal-wrap{margin:26px 22px 8px;position:relative;}
-  .cal-date{font-size:44px;font-weight:700;color:var(--brown);letter-spacing:2px;}
-  .cal-date .slash{font-size:26px;font-weight:400;color:#c4a877;margin:0 6px;}
-  .cal-grid{margin-top:18px;position:relative;}
-  .cal-year-mark{
-    position:absolute;top:34px;left:50%;transform:translateX(-50%);
-    font-size:66px;font-weight:700;color:rgba(226,152,88,.22);letter-spacing:6px;
-    pointer-events:none;white-space:nowrap;
-  }
-  .cal-row{display:grid;grid-template-columns:repeat(7,1fr);position:relative;}
-  .cal-row span{height:38px;display:flex;align-items:center;justify-content:center;
-    font-size:13px;color:var(--cal-num);}
-  .cal-row.head span{color:#8a6f52;font-weight:600;}
-  .cal-row span.on{background:var(--orange);color:#fff;border-radius:50%;
-    width:30px;height:30px;margin:4px auto;justify-content:center;font-weight:600;}
-  .wed-label{padding:26px 15px 0;text-align:center;font-size:17px;font-weight:700;color:#111;}
-  .wed-value{padding:16px 15px 0;text-align:center;font-size:15px;color:#333;
-    line-height:2.2;letter-spacing:1.5px;}
+/* ============================================================
+   ⑥ 音乐播放卡片（录屏右上角按钮的扩展播放条）
+   - 左侧封面 + 中间歌名/状态 + 右侧均衡器动画
+   - .paused 状态暂停均衡器动画
+   ============================================================ */
+.audio-card{
+  margin:20px 15px;background:#f7f7f7;border-radius:8px;
+  display:flex;align-items:center;gap:12px;padding:12px 14px;
+}
+.audio-card .cover{width:62px;height:62px;border-radius:6px;flex:none;overflow:hidden;}
+.audio-card .cover .ph{width:100%;height:100%;font-size:10px;}
+.audio-card .info{flex:1;min-width:0;}
+.audio-card .song{font-size:16px;font-weight:600;color:#111;}
+.audio-card .status{margin-top:6px;font-size:13px;color:#a5a5a5;}
+/* 均衡器四条竖线动画 */
+.eq{display:flex;align-items:flex-end;gap:3px;height:20px;flex:none;}
+.eq i{width:3px;background:#333;border-radius:1px;animation:eq 1s ease-in-out infinite;}
+.eq i:nth-child(1){height:60%;animation-delay:0s;}
+.eq i:nth-child(2){height:100%;animation-delay:.2s;}
+.eq i:nth-child(3){height:75%;animation-delay:.4s;}
+.eq i:nth-child(4){height:90%;animation-delay:.1s;}
+@keyframes eq{0%,100%{transform:scaleY(.4);}50%{transform:scaleY(1);}}
+.paused .eq i{animation-play-state:paused;transform:scaleY(.4);}
 
-  /* ---------- 地图占位 ---------- */
-  .map-card{position:relative;margin:20px 15px;height:158px;border-radius:8px;overflow:hidden;
-    background:
-      linear-gradient(0deg,transparent 47%,#fff 47%,#fff 53%,transparent 53%),
-      linear-gradient(90deg,transparent 30%,#f0e7d8 30%,#f0e7d8 42%,transparent 42%),
-      linear-gradient(90deg,transparent 68%,#f0e7d8 68%,#f0e7d8 80%,transparent 80%),
-      #f2efe9;}
-  .map-card .street{position:absolute;font-size:10px;color:#a09884;letter-spacing:1px;}
-  .map-card .poi{position:absolute;display:flex;align-items:center;gap:3px;font-size:10px;color:#6b6b6b;}
-  .map-card .poi::before{content:'';width:6px;height:6px;border-radius:50%;background:#9fbf6f;}
-  .map-card .poi.main{color:#d24a43;font-weight:600;}
-  .map-card .poi.main::before{width:12px;height:12px;background:#e64340;
-    border:2px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 1px 3px rgba(0,0,0,.3);}
-  .map-card .logo{position:absolute;left:10px;bottom:8px;font-size:11px;color:#4a4a4a;font-weight:600;}
-  .map-card .logo::before{content:'◈ ';color:#3a8ee6;}
-  .map-card .nav-btn{position:absolute;right:12px;bottom:10px;width:38px;height:38px;border-radius:50%;
-    background:#0ab2a0;color:#fff;border:none;font-size:15px;box-shadow:0 2px 6px rgba(0,0,0,.2);}
+/* ============================================================
+   ⑦ 手写楷体标题（"感谢你，成为我的至亲" / "好久不见，婚礼见~"）
+   ============================================================ */
+.hand-title{text-align:center;font-family:var(--kai);color:#1d1d1d;}
+.hand-title.thanks{font-size:28px;letter-spacing:3px;margin:38px 0 6px;}
+.hand-title.end{font-size:28px;letter-spacing:2px;margin:44px 0 60px;}
 
-  /* ---------- 倒计时 ---------- */
-  .countdown{display:flex;justify-content:center;gap:10px;margin:30px 15px 6px;}
-  .countdown .cell{width:56px;padding:9px 0 7px;background:#1c1c1c;border-radius:8px;
-    text-align:center;color:#fff;}
-  .countdown .num{font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;}
-  .countdown .unit{display:block;font-size:11px;margin-top:2px;color:rgba(255,255,255,.75);}
+/* ============================================================
+   ⑧ 新人宝宝照（两个圆形头像并排）
+   ============================================================ */
+.couple-row{display:flex;justify-content:center;gap:52px;margin:30px 0 8px;}
+.couple-row figure{text-align:center;}
+.couple-row .avatar{
+  width:118px;height:118px;border-radius:50%;overflow:hidden;margin:0 auto;
+}
+.couple-row .avatar .ph{width:100%;height:100%;font-size:11px;}
+.couple-row .avatar.pink .ph{background:linear-gradient(135deg,#cfa0b4,#8f7fae);}
+.couple-row .avatar.blue .ph{background:linear-gradient(135deg,#a3a8c9,#7f86ad);}
+.couple-row .name{margin-top:14px;font-size:15px;font-weight:700;color:#111;letter-spacing:2px;}
+.couple-row .date{margin-top:4px;font-size:15px;font-weight:700;color:#111;letter-spacing:1px;}
 
-  /* ---------- 回执表单 ---------- */
-  .rsvp{margin:0 26px;}
-  .field{position:relative;margin-bottom:16px;}
-  .field::before{content:'*';position:absolute;left:13px;top:50%;transform:translateY(-52%);
-    color:var(--red);font-size:15px;}
-  .field input{
-    width:100%;border:1px solid #ddd;border-radius:6px;background:#fff;
-    padding:13px 12px 13px 26px;font-size:15px;color:#333;outline:none;
-  }
-  .field input:focus{border-color:#bbb;}
-  .field input::placeholder{color:#9a9a9a;letter-spacing:1px;}
-  .submit-btn{
-    width:100%;margin-top:6px;background:var(--black);color:#fff;border:none;border-radius:6px;
-    padding:14px 0;font-size:16px;letter-spacing:10px;text-indent:10px;cursor:pointer;
-  }
-  .submit-btn:active{opacity:.85;}
+/* ============================================================
+   ⑨ 英文衬线诗句（右对齐 / 居中）
+   - .slash-mark 斜杠装饰线
+   ============================================================ */
+.en-serif-right{padding:8px 22px 6px;text-align:right;font-family:var(--serif);
+  font-size:14px;color:#3f3f3f;line-height:2.1;letter-spacing:.5px;}
+.slash-mark{padding:0 22px;font-family:var(--serif);font-style:italic;
+  font-size:13px;color:#9a9a9a;letter-spacing:2px;text-align:right;}
+.en-serif-center{padding:22px 15px 4px;text-align:center;font-family:var(--serif);
+  font-size:13px;color:#4a4a4a;letter-spacing:2px;}
 
-  /* ---------- Toast ---------- */
-  .toast{
-    position:fixed;left:50%;bottom:60px;transform:translateX(-50%) translateY(20px);
-    background:rgba(20,20,20,.9);color:#fff;font-size:14px;padding:11px 22px;border-radius:22px;
-    opacity:0;pointer-events:none;transition:all .35s ease;z-index:100;white-space:nowrap;
-  }
-  .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+/* ============================================================
+   ⑩ 婚礼信息 / 日历
+   - 大号棕色日期 + 7列网格
+   - 背景半透明"2025"水印
+   - 21日橙色圆形高亮
+   ============================================================ */
+.cal-wrap{margin:26px 22px 8px;position:relative;}
+.cal-date{font-size:44px;font-weight:700;color:var(--brown);letter-spacing:2px;}
+.cal-date .slash{font-size:26px;font-weight:400;color:#c4a877;margin:0 6px;}
+.cal-grid{margin-top:18px;position:relative;}
+.cal-year-mark{
+  position:absolute;top:34px;left:50%;transform:translateX(-50%);
+  font-size:66px;font-weight:700;color:rgba(226,152,88,.22);letter-spacing:6px;
+  pointer-events:none;white-space:nowrap;
+}
+.cal-row{display:grid;grid-template-columns:repeat(7,1fr);position:relative;}
+.cal-row span{height:38px;display:flex;align-items:center;justify-content:center;
+  font-size:13px;color:var(--cal-num);}
+.cal-row.head span{color:#8a6f52;font-weight:600;}
+.cal-row span.on{background:var(--orange);color:#fff;border-radius:50%;
+  width:30px;height:30px;margin:4px auto;justify-content:center;font-weight:600;}
 
-  .page-end{height:30px;}
+/* 婚礼信息子标题与内容 */
+.wed-label{padding:26px 15px 0;text-align:center;font-size:17px;font-weight:700;color:#111;}
+.wed-value{padding:16px 15px 0;text-align:center;font-size:15px;color:#333;
+  line-height:2.2;letter-spacing:1.5px;}
+
+/* ============================================================
+   ⑪ 地图卡片（纯CSS绘制的高德地图占位）
+   - 用多层 linear-gradient 模拟道路
+   - 红色水滴定位标记 + 绿色导航按钮
+   ============================================================ */
+.map-card{position:relative;margin:20px 15px;height:158px;border-radius:8px;overflow:hidden;
+  background:
+    linear-gradient(0deg,transparent 47%,#fff 47%,#fff 53%,transparent 53%),
+    linear-gradient(90deg,transparent 30%,#f0e7d8 30%,#f0e7d8 42%,transparent 42%),
+    linear-gradient(90deg,transparent 68%,#f0e7d8 68%,#f0e7d8 80%,transparent 80%),
+    #f2efe9;}
+.map-card .street{position:absolute;font-size:10px;color:#a09884;letter-spacing:1px;}
+.map-card .poi{position:absolute;display:flex;align-items:center;gap:3px;font-size:10px;color:#6b6b6b;}
+.map-card .poi::before{content:'';width:6px;height:6px;border-radius:50%;background:#9fbf6f;}
+.map-card .poi.main{color:#d24a43;font-weight:600;}
+.map-card .poi.main::before{width:12px;height:12px;background:#e64340;
+  border:2px solid #fff;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 1px 3px rgba(0,0,0,.3);}
+.map-card .logo{position:absolute;left:10px;bottom:8px;font-size:11px;color:#4a4a4a;font-weight:600;}
+.map-card .logo::before{content:'◈ ';color:#3a8ee6;}
+.map-card .nav-btn{position:absolute;right:12px;bottom:10px;width:38px;height:38px;border-radius:50%;
+  background:#0ab2a0;color:#fff;border:none;font-size:15px;box-shadow:0 2px 6px rgba(0,0,0,.2);}
+
+/* ============================================================
+   ⑫ 倒计时（4个黑色方块，等宽数字）
+   ============================================================ */
+.countdown{display:flex;justify-content:center;gap:10px;margin:30px 15px 6px;}
+.countdown .cell{width:56px;padding:9px 0 7px;background:#1c1c1c;border-radius:8px;
+  text-align:center;color:#fff;}
+.countdown .num{font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;}
+.countdown .unit{display:block;font-size:11px;margin-top:2px;color:rgba(255,255,255,.75);}
+
+/* ============================================================
+   ⑬ 回执表单
+   - 红色 * 用 ::before 伪元素定位在输入框左侧
+   - 黑色提交按钮，字距拉开
+   ============================================================ */
+.rsvp{margin:0 26px;}
+.field{position:relative;margin-bottom:16px;}
+.field::before{content:'*';position:absolute;left:13px;top:50%;transform:translateY(-52%);
+  color:var(--red);font-size:15px;}
+.field input{
+  width:100%;border:1px solid #ddd;border-radius:6px;background:#fff;
+  padding:13px 12px 13px 26px;font-size:15px;color:#333;outline:none;
+}
+.field input:focus{border-color:#bbb;}
+.field input::placeholder{color:#9a9a9a;letter-spacing:1px;}
+.submit-btn{
+  width:100%;margin-top:6px;background:var(--black);color:#fff;border:none;border-radius:6px;
+  padding:14px 0;font-size:16px;letter-spacing:10px;text-indent:10px;cursor:pointer;
+}
+.submit-btn:active{opacity:.85;}
+
+/* ============================================================
+   ⑭ Toast 轻提示（表单提交后弹出）
+   ============================================================ */
+.toast{
+  position:fixed;left:50%;bottom:60px;transform:translateX(-50%) translateY(20px);
+  background:rgba(20,20,20,.9);color:#fff;font-size:14px;padding:11px 22px;border-radius:22px;
+  opacity:0;pointer-events:none;transition:all .35s ease;z-index:100;white-space:nowrap;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+.page-end{height:30px;}
 </style>
 </head>
 <body>
 <div class="page">
 
-  <!-- 悬浮音乐按钮：录屏中固定于右上角的半透明圆形按钮，点击暂停/播放 -->
+  <!-- 悬浮音乐按钮：录屏右上角固定圆形半透明按钮，点击切换播放/暂停 -->
   <button class="fab-music playing" id="fabMusic" aria-label="音乐开关">
     <span class="disc">♪</span>
   </button>
 
-  <!-- ① 文章头部（公众号图文样式） -->
+  <!-- ============ ① 文章头部 ============ -->
   <header class="art-head">
     <h1>We are married｜周晓柯&amp;付嘉欣的婚礼邀请函</h1>
-    <div class="meta"><span>我们结婚吧</span><span>2025-07-21 10:00</span></div>
+    <div class="meta"><span>我们结婚啦</span><span>2025-07-21 10:00</span></div>
   </header>
 
-  <!-- ② 首屏引言 -->
-  <div class="lead-right pad">我们始终相信<br>爱是唯一可以穿越时间与空间的事情</div>
+  <!-- ============ ② 首屏引言（右对齐） ============ -->
+  <div class="lead-right">我们始终相信<br>爱是唯一可以穿越时间与空间的事情</div>
 
-  <!-- ③ 首屏大图 -->
-  <figure class="img-block caption-overlay">
+  <!-- ============ ③ 首屏大图（1.png） ============ -->
+  <figure class="img-block">
     <div class="ph" style="--ar:34/43;background:url('images/1.png') center/cover"></div>
-    <span class="hand-note">总有些惊奇的际遇</span>
   </figure>
 
-  <div class="poem">以婚礼为名义的聚会<br>感谢您的如约而至</div>
-
-  <!-- ④ 音乐播放卡片 -->
+  <!-- ============ ④ 音乐播放卡片（2.jpg 作为封面） ============ -->
   <div class="audio-card" id="audioCard">
-    <div class="cover"><div class="ph" style="background:url('images/2.png') center/cover"></div></div>
+    <div class="cover"><div class="ph" style="background:url('images/2.jpg') center/cover"></div></div>
     <div class="info">
       <div class="song">小宇 - 蓝心羽</div>
       <div class="status" id="audioStatus">音乐正在播放中…</div>
@@ -234,10 +294,7 @@
     <div class="eq"><i></i><i></i><i></i><i></i></div>
   </div>
 
-  <!-- ⑤ 婚礼邀请函 · 手写标题 -->
-  <div class="hand-title invite">婚礼邀请函</div>
-  <div class="serif-sub">W e l c o m e&nbsp;&nbsp;t o&nbsp;&nbsp;o u r&nbsp;&nbsp;w e d d i n g</div>
-
+  <!-- ============ ⑤ 白色主题文案：双向奔赴 ============ -->
   <div class="poem">
     最好的爱情一定是双向奔赴<br>
     在纯洁通透的光彩中相遇<br>
@@ -247,20 +304,21 @@
     来一场关于爱的旅行见证我们爱的启程
   </div>
 
-  <!-- ⑥ 新人宝宝照 -->
+  <!-- ============ ⑥ 新人宝宝照（3.jpg / 4.jpg） ============ -->
   <div class="couple-row">
     <figure>
-      <div class="avatar pink"><div class="ph" style="background:url('images/3.png') center/cover"></div></div>
+      <div class="avatar pink"><div class="ph" style="background:url('images/3.jpg') center/cover"></div></div>
       <div class="name">周晓柯</div>
       <div class="date">1997.12.21</div>
     </figure>
     <figure>
-      <div class="avatar blue"><div class="ph" style="background:url('images/4.png') center/cover"></div></div>
+      <div class="avatar blue"><div class="ph" style="background:url('images/4.jpg') center/cover"></div></div>
       <div class="name">付嘉欣</div>
       <div class="date">1999.04.15</div>
     </figure>
   </div>
 
+  <!-- 承诺文案 -->
   <div class="poem">
     我承诺，会用我的全部真心来爱你<br>
     这份爱，不会因时间流逝而褪色<br>
@@ -268,14 +326,17 @@
     我会一直爱你，直到生命的尽头
   </div>
 
-  <figure class="img-block"><div class="ph" style="--ar:10/9;background:url('images/5.png') center/cover"></div></figure>
+  <!-- 门两侧分立婚纱照（5.jpg） -->
+  <figure class="img-block"><div class="ph" style="--ar:10/9;background:url('images/5.jpg') center/cover"></div></figure>
 
-  <!-- ⑦ 章节：总有些惊奇的际遇 -->
+  <!-- ============ ⑦ 章节：总有些惊奇的际遇 ============ -->
   <div class="sec-title">
     <h2>「总有些惊奇的际遇 比方说当我遇见你」</h2>
     <div class="en">I love you all my life</div>
   </div>
-  <figure class="img-block"><div class="ph" style="--ar:8/9;background:url('images/6.png') center/cover"></div></figure>
+
+  <!-- 香槟塔碰杯特写（6.jpg） -->
+  <figure class="img-block"><div class="ph" style="--ar:8/9;background:url('images/6.jpg') center/cover"></div></figure>
 
   <div class="poem">
     遇见你的瞬间，心动有了定义<br>
@@ -284,25 +345,29 @@
     你就是我生命里最对的那个人
   </div>
 
+  <!-- 两张并排白色婚纱照（7.jpg / 8.jpg） -->
   <div class="grid2">
-    <figure><div class="ph" style="--ar:4/5;background:url('images/7.png') center/cover"></div></figure>
-    <figure><div class="ph" style="--ar:4/5;background:url('images/8.png') center/cover"></div></figure>
+    <figure><div class="ph" style="--ar:4/5;background:url('images/7.jpg') center/cover"></div></figure>
+    <figure><div class="ph" style="--ar:4/5;background:url('images/8.jpg') center/cover"></div></figure>
   </div>
 
+  <!-- 左对齐收尾文案 -->
   <div class="poem" style="text-align:left;">
     遇到你之前，我不懂心动的意义<br>
-    与你相爱后，我才明白爱情这般美好<br>
+    与你相爱后，我才明白爱情是这般美好<br>
     以后的日子，我会是你最温暖的依靠<br>
     你是我最甜蜜的羁绊<br>
     我们一起书写属于我们的幸福人生
   </div>
 
-  <!-- ⑧ 章节：中式红妆 -->
+  <!-- ============ ⑧ 章节：中式红妆 ============ -->
   <div class="sec-title">
     <h2>「我的爱就像一片云 在你的天空无处停」</h2>
     <div class="en">You are the best for me</div>
   </div>
-  <figure class="img-block"><div class="ph red" style="--ar:8/5;background:url('images/9.png') center/cover"></div></figure>
+
+  <!-- 红色中式全身照（9.jpg） -->
+  <figure class="img-block"><div class="ph red" style="--ar:8/5;background:url('images/9.jpg') center/cover"></div></figure>
 
   <div class="poem">
     向你许下永恒之约<br>
@@ -310,7 +375,8 @@
     余生相伴，不离不弃
   </div>
 
-  <figure class="img-block"><div class="ph red" style="--ar:8/5;background:url('images/10.png') center/cover"></div></figure>
+  <!-- 红色比心照（10.jpg） -->
+  <figure class="img-block"><div class="ph red" style="--ar:8/5;background:url('images/10.jpg') center/cover"></div></figure>
 
   <div class="poem">
     从初遇的怦然心动，到如今携手走向圣坛<br>
@@ -319,24 +385,28 @@
     朝朝暮暮，奔赴下一场浪漫
   </div>
 
-  <div class="grid2 stagger">
-    <figure><div class="ph red" style="--ar:10/16;background:url('images/11.png') center/cover"></div></figure>
-    <figure><div class="ph red" style="--ar:10/13;background:url('images/12.png') center/cover"></div></figure>
+  <!-- 红色单人错位拼贴（11.jpg 新郎 / 12.jpg 新娘） -->
+  <div class="collage">
+    <figure class="c-left"><div class="ph red" style="background:url('images/11.jpg') center/cover"></div></figure>
+    <figure class="c-right"><div class="ph red" style="background:url('images/12.jpg') center/cover"></div></figure>
   </div>
 
-  <div class="slash-mark">//</div>
+  <!-- 斜杠装饰线 + 右对齐英文诗句 -->
+  <div class="slash-mark">///</div>
   <div class="en-serif-right">
     I will always stand by your side,<br>
     support you, and love you with all my heart.<br>
     You are my forever and always.
   </div>
 
-  <!-- ⑨ 章节：余生证明 -->
+  <!-- ============ ⑨ 章节：余生证明 ============ -->
   <div class="sec-title">
     <h2>「如果你还是没法相信 我会用余生去证明」</h2>
     <div class="en">Love never fails</div>
   </div>
-  <figure class="img-block"><div class="ph green" style="--ar:7/6;background:url('images/13.png') center/cover"></div></figure>
+
+  <!-- 户外额头相抵照（13.jpg） -->
+  <figure class="img-block"><div class="ph green" style="--ar:7/6;background:url('images/13.jpg') center/cover"></div></figure>
 
   <div class="poem">
     你是我荒芜心田里的一抹春光<br>
@@ -347,15 +417,26 @@
     让每一个平凡的日子都因为有你而闪闪发光
   </div>
 
-  <figure class="img-block"><div class="ph green" style="--ar:4/3;background:url('images/14.png') center/cover"></div></figure>
-  <figure class="img-block"><div class="ph green" style="--ar:4/3;background:url('images/15.png') center/cover"></div></figure>
+  <!-- 户外对视照（14.jpg）、户外正面照（15.jpg） -->
+  <figure class="img-block"><div class="ph green" style="--ar:4/3;background:url('images/14.jpg') center/cover"></div></figure>
+  <figure class="img-block"><div class="ph green" style="--ar:4/3;background:url('images/15.jpg') center/cover"></div></figure>
 
-  <!-- ⑩ 关于婚礼：日历 -->
+  <!-- 右对齐收尾文案 + 斜杠装饰线 -->
+  <div class="en-serif-right" style="font-family:inherit;font-size:15px;color:#333;">
+    你是我生命中最温暖的光<br>
+    照亮了我前行的每一步<br>
+    未来，我愿与你一起<br>
+    谱写属于我们的浪漫诗篇
+  </div>
+  <div class="slash-mark">///</div>
+
+  <!-- ============ ⑩ 关于婚礼：日历 ============ -->
   <div class="sec-title">
     <h2>「关于婚礼」</h2>
     <div class="en">About wedding</div>
   </div>
 
+  <!-- 日历组件：07/21，21日橙色高亮，背景半透明2025水印 -->
   <div class="cal-wrap">
     <div class="cal-date">07<span class="slash">/</span>21</div>
     <div class="cal-grid">
@@ -369,38 +450,40 @@
     </div>
   </div>
 
+  <!-- 婚宴时间与地址 -->
   <div class="wed-label">/婚宴时间/TIME</div>
   <div class="wed-value">2025年7月21日 星期一<br>农历六月廿七 10:00</div>
 
   <div class="wed-label">/婚宴地址/ADDRESS</div>
-  <div class="wed-value">新密市鑫港汇-水晶厅</div>
+  <div class="wed-value">新密市囍事汇-水晶厅</div>
 
-  <!-- ⑪ 地图卡片（高德地图占位） -->
+  <!-- ============ ⑪ 地图卡片（纯CSS绘制高德地图占位） ============ -->
   <div class="map-card">
     <span class="street" style="top:8px;right:34px;">新 华 路</span>
-    <span class="street" style="top:64px;left:8px;">九大街排档</span>
-    <span class="poi main" style="top:58px;left:40%;">喜事业</span>
+    <span class="street" style="top:64px;left:8px;">九大排档</span>
+    <span class="poi main" style="top:58px;left:40%;">喜事汇</span>
     <span class="poi" style="top:34px;left:62%;">同达超市</span>
-    <span class="poi" style="top:82px;left:66%;">四周同达生态园-充电站</span>
+    <span class="poi" style="top:82px;left:66%;">四季同达生态园-充电站</span>
     <span class="logo">高德地图</span>
     <button class="nav-btn" aria-label="导航">➤</button>
   </div>
 
   <div class="poem">
-    “见证爱情最美好的样子，且铭记一生”<br>
+    "见证爱情最美好的样子，且铭记一生"<br>
     我想这便是我们足够珍惜一场婚礼的理由
   </div>
 
-  <!-- ⑫ 拼贴双图 -->
+  <!-- ============ ⑫ 黑白礼服错位拼贴（16.jpg / 17.jpg） ============ -->
   <div class="collage">
-    <figure class="c-left"><div class="ph" style="background:url('images/16.png') center/cover"></div></figure>
-    <figure class="c-right"><div class="ph" style="background:url('images/17.png') center/cover"></div></figure>
+    <figure class="c-left"><div class="ph" style="background:url('images/16.jpg') center/cover"></div></figure>
+    <figure class="c-right"><div class="ph" style="background:url('images/17.jpg') center/cover"></div></figure>
   </div>
 
+  <!-- ============ ⑬ 感谢区 ============ -->
   <div class="hand-title thanks">感谢你，成为我的至亲</div>
 
   <div class="poem">
-    生命中最美好的时光是，当我和你成为“我们”
+    生中最美好的时光是，当我和你成为 "我们"
     <span class="dash">-</span>
     这一生只要一程 这一程是你<br>
     我希望未来的我们一起走下去
@@ -408,7 +491,7 @@
 
   <div class="en-serif-right">For you,&nbsp; a thousand times over</div>
 
-  <!-- ⑬ 倒计时（JS 实时走秒） -->
+  <!-- ============ ⑭ 倒计时（JS实时走秒） ============ -->
   <div class="countdown" id="countdown">
     <div class="cell"><span class="num" id="cdD">10</span><span class="unit">天</span></div>
     <div class="cell"><span class="num" id="cdH">10</span><span class="unit">时</span></div>
@@ -416,17 +499,20 @@
     <div class="cell"><span class="num" id="cdS">03</span><span class="unit">秒</span></div>
   </div>
 
-  <!-- ⑭ 宾客回执 -->
+  <!-- ============ ⑮ 宾客回执表单 ============ -->
   <div class="wed-label">/宾客回执/R.S.V.P</div>
   <form class="rsvp" id="rsvpForm" style="margin-top:22px;">
     <div class="field"><input type="text" name="name" placeholder="姓名" required></div>
     <div class="field"><input type="text" name="count" placeholder="出席人数" required></div>
-    <button type="submit" class="submit-btn">提交</button>
+    <button type="submit" class="submit-btn">提 交</button>
   </form>
 
-  <figure class="img-block" style="margin-top:30px;"><div class="ph dusk" style="--ar:7/6;background:url('images/18.png') center/cover"></div></figure>
+  <!-- 户外拱门婚纱照（18.jpg） -->
+  <figure class="img-block" style="margin-top:30px;">
+    <div class="ph dusk" style="--ar:7/6;background:url('images/18.jpg') center/cover"></div>
+  </figure>
 
-  <!-- ⑮ 新人碎碎念 -->
+  <!-- ============ ⑯ 新人碎碎念 ============ -->
   <div class="wed-label" style="padding-top:8px;">/新人碎碎念/</div>
   <div class="poem">
     如果您身在不同城市<br>
@@ -442,49 +528,61 @@
     好久不见，我们婚礼见~
   </div>
 
+  <!-- 手写体结尾 -->
   <div class="hand-title end">好久不见，婚礼见~</div>
 
   <div class="page-end"></div>
 </div>
 
+<!-- Toast 轻提示容器 -->
 <div class="toast" id="toast"></div>
 
 <script>
-  // 音乐按钮：点击切换播放/暂停状态（旋转动画 + 均衡器暂停）
-  var fab = document.getElementById('fabMusic');
-  var card = document.getElementById('audioCard');
-  var statusEl = document.getElementById('audioStatus');
-  function toggleMusic(){
-    var playing = fab.classList.toggle('playing');
-    card.classList.toggle('paused', !playing);
-    statusEl.textContent = playing ? '音乐正在播放中…' : '音乐已暂停';
-  }
-  fab.addEventListener('click', toggleMusic);
-  card.addEventListener('click', toggleMusic);
+/* ============================================================
+   ① 音乐开关：点击悬浮按钮或播放卡片，切换播放/暂停
+   - 唱片旋转动画同步启停
+   - 均衡器动画同步暂停
+   ============================================================ */
+var fab = document.getElementById('fabMusic');
+var card = document.getElementById('audioCard');
+var statusEl = document.getElementById('audioStatus');
+function toggleMusic(){
+  var playing = fab.classList.toggle('playing');
+  card.classList.toggle('paused', !playing);
+  statusEl.textContent = playing ? '音乐正在播放中…' : '音乐已暂停';
+}
+fab.addEventListener('click', toggleMusic);
+card.addEventListener('click', toggleMusic);
 
-  // 婚礼倒计时：以录屏画面为基准（10天10时43分03秒），从打开页面起实时递减
-  var target = Date.now() + (((10 * 24 + 10) * 60 + 43) * 60 + 3) * 1000;
-  function pad(n){ return (n < 10 ? '0' : '') + n; }
-  function tick(){
-    var diff = Math.max(0, Math.floor((target - Date.now()) / 1000));
-    document.getElementById('cdD').textContent = pad(Math.floor(diff / 86400));
-    document.getElementById('cdH').textContent = pad(Math.floor(diff % 86400 / 3600));
-    document.getElementById('cdM').textContent = pad(Math.floor(diff % 3600 / 60));
-    document.getElementById('cdS').textContent = pad(diff % 60);
-  }
-  tick();
-  setInterval(tick, 1000);
+/* ============================================================
+   ② 婚礼倒计时
+   - 以打开页面时的录屏画面为基准（10天10时43分03秒）
+   - 每秒实时递减，数字补零对齐
+   ============================================================ */
+var target = Date.now() + (((10 * 24 + 10) * 60 + 43) * 60 + 3) * 1000;
+function pad(n){ return (n < 10 ? '0' : '') + n; }
+function tick(){
+  var diff = Math.max(0, Math.floor((target - Date.now()) / 1000));
+  document.getElementById('cdD').textContent = pad(Math.floor(diff / 86400));
+  document.getElementById('cdH').textContent = pad(Math.floor(diff % 86400 / 3600));
+  document.getElementById('cdM').textContent = pad(Math.floor(diff % 3600 / 60));
+  document.getElementById('cdS').textContent = pad(diff % 60);
+}
+tick();
+setInterval(tick, 1000);
 
-  // 回执表单：阻止跳转，轻量 toast 反馈
-  var toast = document.getElementById('toast'), toastTimer;
-  document.getElementById('rsvpForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    toast.textContent = '提交成功，感谢您的回复 ❤';
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2200);
-    this.reset();
-  });
+/* ============================================================
+   ③ 回执表单提交：阻止默认跳转，弹出 Toast 提示
+   ============================================================ */
+var toast = document.getElementById('toast'), toastTimer;
+document.getElementById('rsvpForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  toast.textContent = '提交成功，感谢您的回复 ❤';
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ toast.classList.remove('show'); }, 2200);
+  this.reset();
+});
 </script>
 </body>
 </html>
