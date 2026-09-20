@@ -263,10 +263,12 @@ figure{margin:0;}
 </style>
 </head>
 <body>
+<!-- 背景音乐：把 music.mp3 放在与HTML同级的桌面即可，loop循环 -->
+<audio id="bgm" src="music.mp3" loop preload="auto"></audio>
 <div class="page">
 
   <!-- 悬浮音乐按钮：录屏右上角固定圆形半透明按钮，点击切换播放/暂停 -->
-  <button class="fab-music playing" id="fabMusic" aria-label="音乐开关">
+  <button class="fab-music" id="fabMusic" aria-label="音乐开关">
     <span class="disc">♪</span>
   </button>
 
@@ -285,11 +287,11 @@ figure{margin:0;}
   </figure>
 
   <!-- ============ ④ 音乐播放卡片（2.jpg 作为封面） ============ -->
-  <div class="audio-card" id="audioCard">
-    <div class="cover"><div class="ph" style="background:url('images/2.jpg') center/cover"></div></div>
+  <div class="audio-card paused" id="audioCard">
+    <div class="cover"><div class="ph" style="background:url('images/2.jpg') 0% 85%/cover"></div></div>
     <div class="info">
       <div class="song">小宇 - 蓝心羽</div>
-      <div class="status" id="audioStatus">音乐正在播放中…</div>
+      <div class="status" id="audioStatus">点击页面任意处开始播放…</div>
     </div>
     <div class="eq"><i></i><i></i><i></i><i></i></div>
   </div>
@@ -307,12 +309,12 @@ figure{margin:0;}
   <!-- ============ ⑥ 新人宝宝照（3.jpg / 4.jpg） ============ -->
   <div class="couple-row">
     <figure>
-      <div class="avatar pink"><div class="ph" style="background:url('images/3.jpg') center/cover"></div></div>
+      <div class="avatar pink"><div class="ph" style="background:url('images/3.jpg') 32% 30%/140%"></div></div>
       <div class="name">周晓柯</div>
       <div class="date">1997.12.21</div>
     </figure>
     <figure>
-      <div class="avatar blue"><div class="ph" style="background:url('images/4.jpg') center/cover"></div></div>
+      <div class="avatar blue"><div class="ph" style="background:url('images/4.jpg') 50% 7%/160%"></div></div>
       <div class="name">付嘉欣</div>
       <div class="date">1999.04.15</div>
     </figure>
@@ -327,7 +329,7 @@ figure{margin:0;}
   </div>
 
   <!-- 门两侧分立婚纱照（5.jpg） -->
-  <figure class="img-block"><div class="ph" style="--ar:10/9;background:url('images/5.jpg') center/cover"></div></figure>
+  <figure class="img-block"><div class="ph" style="--ar:12/8;background:url('images/5.jpg') 50% 55%/cover"></div></figure>
 
   <!-- ============ ⑦ 章节：总有些惊奇的际遇 ============ -->
   <div class="sec-title">
@@ -336,7 +338,7 @@ figure{margin:0;}
   </div>
 
   <!-- 香槟塔碰杯特写（6.jpg） -->
-  <figure class="img-block"><div class="ph" style="--ar:8/9;background:url('images/6.jpg') center/cover"></div></figure>
+  <figure class="img-block"><div class="ph" style="--ar:6/9;background:url('images/6.jpg') center/cover"></div></figure>
 
   <div class="poem">
     遇见你的瞬间，心动有了定义<br>
@@ -367,7 +369,7 @@ figure{margin:0;}
   </div>
 
   <!-- 红色中式全身照（9.jpg） -->
-  <figure class="img-block"><div class="ph red" style="--ar:8/5;background:url('images/9.jpg') center/cover"></div></figure>
+  <figure class="img-block"><div class="ph red" style="--ar:6/9;background:url('images/9.jpg') center/cover"></div></figure>
 
   <div class="poem">
     向你许下永恒之约<br>
@@ -387,8 +389,8 @@ figure{margin:0;}
 
   <!-- 红色单人错位拼贴（11.jpg 新郎 / 12.jpg 新娘） -->
   <div class="collage">
-    <figure class="c-left"><div class="ph red" style="background:url('images/11.jpg') center/cover"></div></figure>
-    <figure class="c-right"><div class="ph red" style="background:url('images/12.jpg') center/cover"></div></figure>
+    <figure class="c-left"><div class="ph red" style="--ar:12/5;background:url('images/11.jpg') center/cover"></div></figure>
+    <figure class="c-right"><div class="ph red" style="--ar:8/5;background:url('images/12.jpg') center/cover"></div></figure>
   </div>
 
   <!-- 斜杠装饰线 + 右对齐英文诗句 -->
@@ -406,7 +408,7 @@ figure{margin:0;}
   </div>
 
   <!-- 户外额头相抵照（13.jpg） -->
-  <figure class="img-block"><div class="ph green" style="--ar:7/6;background:url('images/13.jpg') center/cover"></div></figure>
+  <figure class="img-block"><div class="ph green" style="--ar:5/6;background:url('images/13.jpg') center/cover"></div></figure>
 
   <div class="poem">
     你是我荒芜心田里的一抹春光<br>
@@ -418,8 +420,8 @@ figure{margin:0;}
   </div>
 
   <!-- 户外对视照（14.jpg）、户外正面照（15.jpg） -->
-  <figure class="img-block"><div class="ph green" style="--ar:4/3;background:url('images/14.jpg') center/cover"></div></figure>
-  <figure class="img-block"><div class="ph green" style="--ar:4/3;background:url('images/15.jpg') center/cover"></div></figure>
+  <figure class="img-block"><div class="ph green" style="--ar:5/3;background:url('images/14.jpg') center/cover"></div></figure>
+  <figure class="img-block"><div class="ph green" style="--ar:5/3;background:url('images/15.jpg') center/cover"></div></figure>
 
   <!-- 右对齐收尾文案 + 斜杠装饰线 -->
   <div class="en-serif-right" style="font-family:inherit;font-size:15px;color:#333;">
@@ -476,7 +478,7 @@ figure{margin:0;}
   <!-- ============ ⑫ 黑白礼服错位拼贴（16.jpg / 17.jpg） ============ -->
   <div class="collage">
     <figure class="c-left"><div class="ph" style="background:url('images/16.jpg') center/cover"></div></figure>
-    <figure class="c-right"><div class="ph" style="background:url('images/17.jpg') center/cover"></div></figure>
+    <figure class="c-right"><div class="ph" style="background:url('images/17.jpg') 0% 0%/cover"></div></figure>
   </div>
 
   <!-- ============ ⑬ 感谢区 ============ -->
@@ -509,7 +511,7 @@ figure{margin:0;}
 
   <!-- 户外拱门婚纱照（18.jpg） -->
   <figure class="img-block" style="margin-top:30px;">
-    <div class="ph dusk" style="--ar:7/6;background:url('images/18.jpg') center/cover"></div>
+    <div class="ph dusk" style="--ar:8/5;background:url('images/18.jpg') center/cover"></div>
   </figure>
 
   <!-- ============ ⑯ 新人碎碎念 ============ -->
@@ -539,20 +541,59 @@ figure{margin:0;}
 
 <script>
 /* ============================================================
-   ① 音乐开关：点击悬浮按钮或播放卡片，切换播放/暂停
-   - 唱片旋转动画同步启停
-   - 均衡器动画同步暂停
+   ① 音乐控制（适配微信内置浏览器自动播放限制）
+   - 微信 iOS：监听 WeixinJSBridgeReady 事件后播放
+   - 微信 Android / 其他浏览器：首次触摸/点击页面时播放
+   - toggleMusic 基于 audio.paused 实际状态切换 UI
    ============================================================ */
 var fab = document.getElementById('fabMusic');
 var card = document.getElementById('audioCard');
 var statusEl = document.getElementById('audioStatus');
+var bgm = document.getElementById('bgm');
+var started = false;  // 音乐是否已经开始播放过
+
+// 更新 UI 状态（唱片旋转 + 均衡器 + 文字）
+function setMusicUI(isPlaying){
+  fab.classList.toggle('playing', isPlaying);
+  card.classList.toggle('paused', !isPlaying);
+  statusEl.textContent = isPlaying ? '音乐正在播放中…' : '音乐已暂停';
+}
+
+// 真正播放音乐
+function playBgm(){
+  bgm.play().then(function(){
+    setMusicUI(true);
+    started = true;
+  }).catch(function(){
+    setMusicUI(false);
+  });
+}
+
+// 切换播放/暂停
 function toggleMusic(){
-  var playing = fab.classList.toggle('playing');
-  card.classList.toggle('paused', !playing);
-  statusEl.textContent = playing ? '音乐正在播放中…' : '音乐已暂停';
+  if (bgm.paused) {
+    bgm.play().then(function(){ setMusicUI(true); started = true; });
+  } else {
+    bgm.pause();
+    setMusicUI(false);
+  }
 }
 fab.addEventListener('click', toggleMusic);
 card.addEventListener('click', toggleMusic);
+
+// 微信环境：WeixinJSBridgeReady 事件触发后尝试播放（微信 iOS 关键）
+document.addEventListener('WeixinJSBridgeReady', function(){
+  if (!started) playBgm();
+}, false);
+
+// 兜底：非微信环境或事件未触发时，用户首次触摸/点击即播放
+function firstGesture(){
+  if (!started) playBgm();
+  document.removeEventListener('touchstart', firstGesture);
+  document.removeEventListener('click', firstGesture);
+}
+document.addEventListener('touchstart', firstGesture);
+document.addEventListener('click', firstGesture);
 
 /* ============================================================
    ② 婚礼倒计时
