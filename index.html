@@ -6,7 +6,7 @@
 <title>We are married｜周晓柯&付嘉欣的婚礼邀请函</title>
 <style>
   :root{
-    --ink:#222; --gray:#8a8a8a;
+    --ink:#222; --gray:#8a8a8a; --light-gray:#b5ae9f;
     --orange:#e87a33; --brown:#9c6b2f; --cal-num:#5f5548;
     --red:#e64340; --black:#141414; --paper:#fff;
     --kai:'Kaiti SC','STKaiti','KaiTi','BiauKai','DFKai-SB',cursive;
@@ -109,7 +109,9 @@
   /* ---------- 人物（宝宝照） ---------- */
   .couple-row{display:flex;justify-content:center;gap:52px;margin:30px 0 8px;}
   .couple-row figure{text-align:center;}
-  .couple-row .avatar{width:118px;height:118px;border-radius:50%;overflow:hidden;margin:0 auto;}
+  .couple-row .avatar{
+    width:118px;height:118px;border-radius:50%;overflow:hidden;margin:0 auto;
+  }
   .couple-row .avatar .ph{width:100%;height:100%;font-size:11px;}
   .couple-row .avatar.pink .ph{background:linear-gradient(135deg,#cfa0b4,#8f7fae);}
   .couple-row .avatar.blue .ph{background:linear-gradient(135deg,#a3a8c9,#7f86ad);}
@@ -121,6 +123,8 @@
     font-size:14px;color:#3f3f3f;line-height:2.1;letter-spacing:.5px;}
   .slash-mark{padding:0 22px;font-family:var(--serif);font-style:italic;
     font-size:13px;color:#9a9a9a;letter-spacing:2px;}
+  .en-serif-center{padding:22px 15px 4px;text-align:center;font-family:var(--serif);
+    font-size:13px;color:#4a4a4a;letter-spacing:2px;}
 
   /* ---------- 婚礼信息 / 日历 ---------- */
   .cal-wrap{margin:26px 22px 8px;position:relative;}
@@ -206,7 +210,7 @@
   <!-- ① 文章头部（公众号图文样式） -->
   <header class="art-head">
     <h1>We are married｜周晓柯&amp;付嘉欣的婚礼邀请函</h1>
-    <div class="meta"><span>我们结婚啦</span><span>2025-07-21 10:00</span></div>
+    <div class="meta"><span>我们结婚吧</span><span>2025-07-21 10:00</span></div>
   </header>
 
   <!-- ② 首屏引言 -->
@@ -214,7 +218,7 @@
 
   <!-- ③ 首屏大图 -->
   <figure class="img-block caption-overlay">
-    <div class="ph" style="--ar:34/43"><b>照片占位 · 婚纱照（白色礼服 · 香槟）</b><span>345 × 435</span></div>
+    <div class="ph" style="--ar:34/43;background:url('images/1.png') center/cover"></div>
     <span class="hand-note">总有些惊奇的际遇</span>
   </figure>
 
@@ -222,7 +226,7 @@
 
   <!-- ④ 音乐播放卡片 -->
   <div class="audio-card" id="audioCard">
-    <div class="cover"><div class="ph"><span>封面</span><span>62×62</span></div></div>
+    <div class="cover"><div class="ph" style="background:url('images/2.png') center/cover"></div></div>
     <div class="info">
       <div class="song">小宇 - 蓝心羽</div>
       <div class="status" id="audioStatus">音乐正在播放中…</div>
@@ -246,12 +250,12 @@
   <!-- ⑥ 新人宝宝照 -->
   <div class="couple-row">
     <figure>
-      <div class="avatar pink"><div class="ph"><span>周晓柯 · 宝宝照</span><span>118×118</span></div></div>
+      <div class="avatar pink"><div class="ph" style="background:url('images/3.png') center/cover"></div></div>
       <div class="name">周晓柯</div>
       <div class="date">1997.12.21</div>
     </figure>
     <figure>
-      <div class="avatar blue"><div class="ph"><span>付嘉欣 · 宝宝照</span><span>118×118</span></div></div>
+      <div class="avatar blue"><div class="ph" style="background:url('images/4.png') center/cover"></div></div>
       <div class="name">付嘉欣</div>
       <div class="date">1999.04.15</div>
     </figure>
@@ -264,14 +268,14 @@
     我会一直爱你，直到生命的尽头
   </div>
 
-  <figure class="img-block"><div class="ph" style="--ar:10/9"><b>照片占位 · 门廊合影</b><span>345 × 310</span></div></figure>
+  <figure class="img-block"><div class="ph" style="--ar:10/9;background:url('images/5.png') center/cover"></div></figure>
 
   <!-- ⑦ 章节：总有些惊奇的际遇 -->
   <div class="sec-title">
     <h2>「总有些惊奇的际遇 比方说当我遇见你」</h2>
     <div class="en">I love you all my life</div>
   </div>
-  <figure class="img-block"><div class="ph" style="--ar:8/9"><b>照片占位 · 香槟塔合影</b><span>345 × 388</span></div></figure>
+  <figure class="img-block"><div class="ph" style="--ar:8/9;background:url('images/6.png') center/cover"></div></figure>
 
   <div class="poem">
     遇见你的瞬间，心动有了定义<br>
@@ -281,8 +285,8 @@
   </div>
 
   <div class="grid2">
-    <figure><div class="ph" style="--ar:4/5"><span>照片占位</span><span>167 × 209</span></div></figure>
-    <figure><div class="ph" style="--ar:4/5"><span>照片占位</span><span>167 × 209</span></div></figure>
+    <figure><div class="ph" style="--ar:4/5;background:url('images/7.png') center/cover"></div></figure>
+    <figure><div class="ph" style="--ar:4/5;background:url('images/8.png') center/cover"></div></figure>
   </div>
 
   <div class="poem" style="text-align:left;">
@@ -298,7 +302,7 @@
     <h2>「我的爱就像一片云 在你的天空无处停」</h2>
     <div class="en">You are the best for me</div>
   </div>
-  <figure class="img-block"><div class="ph red" style="--ar:8/5"><b>照片占位 · 中式红妆（案几花艺）</b><span>345 × 215</span></div></figure>
+  <figure class="img-block"><div class="ph red" style="--ar:8/5;background:url('images/9.png') center/cover"></div></figure>
 
   <div class="poem">
     向你许下永恒之约<br>
@@ -306,7 +310,7 @@
     余生相伴，不离不弃
   </div>
 
-  <figure class="img-block"><div class="ph red" style="--ar:8/5"><b>照片占位 · 中式合影（比心）</b><span>345 × 215</span></div></figure>
+  <figure class="img-block"><div class="ph red" style="--ar:8/5;background:url('images/10.png') center/cover"></div></figure>
 
   <div class="poem">
     从初遇的怦然心动，到如今携手走向圣坛<br>
@@ -316,8 +320,8 @@
   </div>
 
   <div class="grid2 stagger">
-    <figure><div class="ph red" style="--ar:10/16"><span>照片占位 · 新郎</span><span>167 × 267</span></div></figure>
-    <figure><div class="ph red" style="--ar:10/13"><span>照片占位 · 新娘</span><span>167 × 217</span></div></figure>
+    <figure><div class="ph red" style="--ar:10/16;background:url('images/11.png') center/cover"></div></figure>
+    <figure><div class="ph red" style="--ar:10/13;background:url('images/12.png') center/cover"></div></figure>
   </div>
 
   <div class="slash-mark">//</div>
@@ -332,7 +336,7 @@
     <h2>「如果你还是没法相信 我会用余生去证明」</h2>
     <div class="en">Love never fails</div>
   </div>
-  <figure class="img-block"><div class="ph green" style="--ar:7/6"><b>照片占位 · 户外草坪合影</b><span>345 × 295</span></div></figure>
+  <figure class="img-block"><div class="ph green" style="--ar:7/6;background:url('images/13.png') center/cover"></div></figure>
 
   <div class="poem">
     你是我荒芜心田里的一抹春光<br>
@@ -343,8 +347,8 @@
     让每一个平凡的日子都因为有你而闪闪发光
   </div>
 
-  <figure class="img-block"><div class="ph green" style="--ar:4/3"><span>照片占位 · 湖畔仪式 ①</span><span>345 × 259</span></div></figure>
-  <figure class="img-block"><div class="ph green" style="--ar:4/3"><span>照片占位 · 湖畔仪式 ②</span><span>345 × 259</span></div></figure>
+  <figure class="img-block"><div class="ph green" style="--ar:4/3;background:url('images/14.png') center/cover"></div></figure>
+  <figure class="img-block"><div class="ph green" style="--ar:4/3;background:url('images/15.png') center/cover"></div></figure>
 
   <!-- ⑩ 关于婚礼：日历 -->
   <div class="sec-title">
@@ -369,7 +373,7 @@
   <div class="wed-value">2025年7月21日 星期一<br>农历六月廿七 10:00</div>
 
   <div class="wed-label">/婚宴地址/ADDRESS</div>
-  <div class="wed-value">新密市囍事汇-水晶厅</div>
+  <div class="wed-value">新密市鑫港汇-水晶厅</div>
 
   <!-- ⑪ 地图卡片（高德地图占位） -->
   <div class="map-card">
@@ -389,8 +393,8 @@
 
   <!-- ⑫ 拼贴双图 -->
   <div class="collage">
-    <figure class="c-left"><div class="ph"><span>照片占位 · 主纱合影</span><span>200 × 320</span></div></figure>
-    <figure class="c-right"><div class="ph"><span>照片占位 · 白纱侧拍</span><span>159 × 207</span></div></figure>
+    <figure class="c-left"><div class="ph" style="background:url('images/16.png') center/cover"></div></figure>
+    <figure class="c-right"><div class="ph" style="background:url('images/17.png') center/cover"></div></figure>
   </div>
 
   <div class="hand-title thanks">感谢你，成为我的至亲</div>
@@ -420,7 +424,7 @@
     <button type="submit" class="submit-btn">提交</button>
   </form>
 
-  <figure class="img-block" style="margin-top:30px;"><div class="ph dusk" style="--ar:7/6"><b>照片占位 · 黄昏湖畔剪影</b><span>345 × 295</span></div></figure>
+  <figure class="img-block" style="margin-top:30px;"><div class="ph dusk" style="--ar:7/6;background:url('images/18.png') center/cover"></div></figure>
 
   <!-- ⑮ 新人碎碎念 -->
   <div class="wed-label" style="padding-top:8px;">/新人碎碎念/</div>
